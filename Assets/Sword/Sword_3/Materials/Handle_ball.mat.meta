@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d3bff85cdfb964b44b82ee0dbde3a57b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_3/Materials/Handle_ball.mat
+  uploadId: 405732

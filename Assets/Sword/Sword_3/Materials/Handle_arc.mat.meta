@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 572801738af774b78a486b6dd6f95636
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_3/Materials/Handle_arc.mat
+  uploadId: 405732

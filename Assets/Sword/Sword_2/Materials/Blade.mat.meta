@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 684432f8df41d4792ac02b8423bc5149
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_2/Materials/Blade.mat
+  uploadId: 405732

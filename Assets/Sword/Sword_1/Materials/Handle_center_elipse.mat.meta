@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 761c92ca3ba4f4c7eb4e4faf99b382db
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_1/Materials/Handle_center_elipse.mat
+  uploadId: 405732

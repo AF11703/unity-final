@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1b4cc801d134c42c8b53a2ceaf8a226a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_2/Materials/Handle_spiral.mat
+  uploadId: 405732

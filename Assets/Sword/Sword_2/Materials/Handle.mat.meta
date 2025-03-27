@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 29e8ea979333a4baabff4348ef58d128
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183856
+  packageName: "Knight\u2019s sword"
+  packageVersion: 1.0
+  assetPath: Assets/Sword/Sword_2/Materials/Handle.mat
+  uploadId: 405732
