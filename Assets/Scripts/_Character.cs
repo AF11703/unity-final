@@ -71,8 +71,11 @@ public class _Character : MonoBehaviour
         return _isAttacking;
     }
 
-
-
+    
+    public void setAttacking(bool val)
+    {
+        _isAttacking = val;
+    }
 
     public void Damage(_Character ch)
     {
