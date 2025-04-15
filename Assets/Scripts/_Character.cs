@@ -77,12 +77,29 @@ public class _Character : MonoBehaviour
         _isAttacking = val;
     }
 
-    public void Damage(_Character ch)
+    public void Damage(_Character ch, bool blocked = false)
     {
-        float damage = this._strength - ch._defense;
+        if (blocked)
+        {
+            return; // If the attack is blocked, no damage is dealt
+        }
 
+        float damage;
+
+        if (this._strength <= ch._defense)
+        {
+            damage = 5f;
+        }
+        else
+        {
+            damage = Mathf.Abs(this._strength - ch._defense);
+        }
+        
         ch._health -= damage;
     }
+
+        
+    
 
     public void Die()
     {

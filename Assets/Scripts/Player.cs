@@ -12,7 +12,6 @@ public class Player : _Character
     [SerializeField] AnimationClip swing;
     [SerializeField] AnimationClip block;
 
-    float attackStart = 0f;
 
     Animator handAnimator;
 
@@ -43,43 +42,51 @@ public class Player : _Character
         {
             AnimationClip currentClip = animancerComponent.States.Current.Clip;
             Debug.Log($"Current animation clip is: {currentClip.name}");
+
+            if (currentState == PlayerState.Swinging && currentClip == swing)
+            {
+                var state = animancerComponent.States[swing];
+
+                if (state.NormalizedTime >= 1f)
+                {
+                    currentState = PlayerState.Idle; // Reset to Idle after swing animation completes
+                }
+            }
         }
         else
         {
             Debug.Log("No animation is currently playing.");
         }
+
+
+
     }
+
+    public void Heal()
+    {
+        Debug.Log("Healing the player");
+        // Implement healing logic here
+        setHealth(getHealth() + 20f); // Example healing logic
+    }
+
 
     private void FixedUpdate()
     {
-        if (currentState == PlayerState.Swinging)
-        {
-            attackStart += Time.deltaTime;
-        }
-        else
-        {
-            attackStart = 0f;
-        }
-        
-        /*
-        if (currentState != PlayerState.Blocking && animancerComponent.IsPlaying(block))
-        {
-            animancerComponent.Stop();
-        }
-        */
-
         PlayAnimation(animancerComponent, handAnimator, currentState);
     }
 
 
-    void OnAttack() //used by InputSystem
+    public void OnAttack(InputAction.CallbackContext context) //used by InputSystem
     {
-       
-        Debug.Log("Attacking");
-        currentState = PlayerState.Swinging;
+
+        if (context.performed && currentState != PlayerState.Swinging)
+        {
+            currentState = PlayerState.Swinging;
+        }
+
     }
 
-    void OnBlock(InputAction.CallbackContext context) //used by InputSystem
+    public void OnBlock(InputAction.CallbackContext context) //used by InputSystem
     {
         if (context.performed)
         {
@@ -95,13 +102,6 @@ public class Player : _Character
 
     void PlayAnimation(AnimancerComponent ac, Animator an, PlayerState state)
     {
-
-        /*
-        if (ac.IsPlaying() && state != PlayerState.Idle)
-        {
-            return;
-        }
-        */
 
         switch (state)
         {
