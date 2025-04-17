@@ -34,14 +34,14 @@ namespace StarterAssets
 			}
 		}
 
-		public void OnJump(InputValue value)
+		public void OnJump(InputAction.CallbackContext context)
 		{
-			JumpInput(value.isPressed);
+			JumpInput(context.ReadValue<bool>());
 		}
 
-		public void OnSprint(InputValue value)
+		public void OnSprint(InputAction.CallbackContext context)
 		{
-			SprintInput(value.isPressed);
+			SprintInput(context.ReadValue<bool>());
 		}
 #endif
 
