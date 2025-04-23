@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -11,6 +12,14 @@ public class _Character : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private bool _isDead = false;
     [SerializeField] private bool _isAttacking = false;
+
+    public HealthBar targetHealthBar;
+
+
+    private void Awake()
+    {
+        targetHealthBar.SetMaxHealthValue(_maxHealth);
+    }
 
 
     public float getSpeed()
@@ -96,6 +105,7 @@ public class _Character : MonoBehaviour
         }
         
         ch._health -= damage;
+        targetHealthBar.SetHealthValue(ch._health);
     }
 
         

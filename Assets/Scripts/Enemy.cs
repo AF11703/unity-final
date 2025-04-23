@@ -12,6 +12,7 @@ public class Enemy : _Character
 
     NavMeshAgent navMeshAgent;
 
+    [SerializeField] GameObject weaponHitBox;
     [SerializeField] GameObject player;
     [SerializeField] GameObject rotateObj;
     enum EnemyState
@@ -27,8 +28,7 @@ public class Enemy : _Character
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        setSpeed(1f);
+        weaponHitBox.SetActive(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +42,15 @@ public class Enemy : _Character
     private void FixedUpdate()
     {
         PlayAnimation(animancerComponent, currentState);
+
+        if (animancerComponent.IsPlaying(attackAnimation))
+        {
+            weaponHitBox.SetActive(true);
+        }
+        else
+        {
+            weaponHitBox.SetActive(false);
+        }
     }
 
 
@@ -92,6 +101,7 @@ public class Enemy : _Character
                 break;
             
             case EnemyState.Chasing:
+                weaponHitBox.SetActive(false);
                 if (!ac.IsPlaying(chaseAnimation))
                 {
                     ac.Play(chaseAnimation);
