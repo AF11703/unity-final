@@ -41,16 +41,20 @@ public class Enemy : _Character
 
     private void FixedUpdate()
     {
-        PlayAnimation(animancerComponent, currentState);
-
         if (animancerComponent.IsPlaying(attackAnimation))
         {
+            navMeshAgent.isStopped = true;
             weaponHitBox.SetActive(true);
+
         }
         else
         {
+            navMeshAgent.isStopped = false;
             weaponHitBox.SetActive(false);
         }
+        PlayAnimation(animancerComponent, currentState);
+
+        
     }
 
 
@@ -81,6 +85,7 @@ public class Enemy : _Character
         }
         else
         {
+
             if (currentState != EnemyState.Chasing)
             {
                 currentState = EnemyState.Chasing;

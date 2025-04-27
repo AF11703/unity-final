@@ -88,22 +88,32 @@ public class _Character : MonoBehaviour
 
     public void Damage(_Character ch, bool blocked = false)
     {
-        if (blocked)
-        {
-            return; // If the attack is blocked, no damage is dealt
-        }
-
         float damage;
 
-        if (this._strength <= ch._defense)
+        if (blocked)
         {
-            damage = 5f;
+            damage = (float)(0.5 * _strength) - ch._defense; 
         }
         else
         {
-            damage = Mathf.Abs(this._strength - ch._defense);
+            if (_strength <= ch._defense)
+            {
+                damage = 5f;
+            }
+            else
+            {
+                damage = Mathf.Abs(_strength - ch._defense);
+            }
         }
-        
+
+        if (damage < 0)
+        {
+            damage = 0f; // No damage if defense is higher
+        }
+
+
+
+
         ch._health -= damage;
         targetHealthBar.SetHealthValue(ch._health);
     }

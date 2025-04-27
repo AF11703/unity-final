@@ -25,7 +25,7 @@ public class Player : _Character
 
 
 
-    PlayerState currentState = PlayerState.Idle;
+    public PlayerState currentState = PlayerState.Idle;
 
     
     private void Awake()
