@@ -4,22 +4,30 @@ using UnityEngine.AI;
 using Animancer;
 public class Enemy : _Character
 {
+    NavMeshAgent navMeshAgent;
+    
+    [SerializeField] float meleeAttackRange = 1.5f;
+    [SerializeField] float shootingRange = 10f;
+    
+
     [SerializeField] AnimancerComponent animancerComponent;
 
     [Header("Animations")]
     [SerializeField] AnimationClip attackAnimation;
     [SerializeField] AnimationClip chaseAnimation;
-
-    NavMeshAgent navMeshAgent;
-
+    [SerializeField] AnimationClip fireballAnimation;
+    
     [SerializeField] GameObject weaponHitBox;
     [SerializeField] GameObject player;
     [SerializeField] GameObject rotateObj;
+    [SerializeField] GameObject fireballPrefab;
+
+    [SerializeField] GameObject handPos;
     enum EnemyState
     {
         Attacking,
+        Shooting,
         Chasing,
-        Reset
     }
 
     EnemyState currentState = EnemyState.Chasing;
@@ -52,8 +60,8 @@ public class Enemy : _Character
             navMeshAgent.isStopped = false;
             weaponHitBox.SetActive(false);
         }
+        
         PlayAnimation(animancerComponent, currentState);
-
         
     }
 
@@ -66,32 +74,27 @@ public class Enemy : _Character
         
        
         rotateObj.transform.LookAt(player.transform.position);
-        
-        
-        
-       
 
 
-        if (distanceToPlayer <= 1.5f)
+
+
+
+
+        if (distanceToPlayer <= meleeAttackRange)
         {
-            if (currentState != EnemyState.Attacking)
-            {
-                currentState = EnemyState.Attacking;
-            }
-            
-            
-
-            return;
+            currentState = EnemyState.Attacking;
         }
-        else
+        else if (distanceToPlayer <= shootingRange && distanceToPlayer > meleeAttackRange + 3f)
         {
-
-            if (currentState != EnemyState.Chasing)
-            {
-                currentState = EnemyState.Chasing;
-            }
+            currentState = EnemyState.Shooting;
+        }
+        else 
+        {
+            currentState = EnemyState.Chasing;
             navMeshAgent.SetDestination(player.transform.position);
         }
+            
+        
 
                 
 
@@ -105,6 +108,18 @@ public class Enemy : _Character
                 ac.Play(attackAnimation);
                 break;
             
+            case EnemyState.Shooting:
+                ac.Play(fireballAnimation);
+
+                if (!GameObject.FindGameObjectWithTag("Fireball"))
+                {
+                    Invoke(nameof(ShootFireBall), 0.3f);
+                }
+
+                
+
+                break;
+
             case EnemyState.Chasing:
                 weaponHitBox.SetActive(false);
                 if (!ac.IsPlaying(chaseAnimation))
@@ -117,4 +132,16 @@ public class Enemy : _Character
             default: break;
         }
     }
+
+    private void ShootFireBall()
+    {
+        GameObject fireball = Instantiate(fireballPrefab, handPos.transform.position, Quaternion.identity);
+        fireball.transform.LookAt(player.transform.position);
+        Rigidbody rb = fireball.GetComponent<Rigidbody>();
+        rb.AddForce((player.transform.position - transform.position).normalized * 10f, ForceMode.Impulse);
+
+        Destroy(fireball, 2f);
+    }
+
+    
 }
