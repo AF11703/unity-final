@@ -23,6 +23,8 @@ public class Enemy : _Character
     [SerializeField] GameObject fireballPrefab;
 
     [SerializeField] GameObject handPos;
+
+    bool canShoot = true;
     enum EnemyState
     {
         Attacking,
@@ -111,11 +113,12 @@ public class Enemy : _Character
             case EnemyState.Shooting:
                 ac.Play(fireballAnimation);
 
-                if (!GameObject.FindGameObjectWithTag("Fireball"))
+                if (canShoot)
                 {
-                    Invoke(nameof(ShootFireBall), 0.3f);
+                    Invoke(nameof(ShootFireBall), 0.5f);
+                    canShoot = false;
+                    Invoke(nameof(ResetCanShoot), 2f);
                 }
-
                 
 
                 break;
@@ -140,8 +143,12 @@ public class Enemy : _Character
         Rigidbody rb = fireball.GetComponent<Rigidbody>();
         rb.AddForce((player.transform.position - transform.position).normalized * 10f, ForceMode.Impulse);
 
-        Destroy(fireball, 2f);
+        Destroy(fireball, 1f);
     }
 
-    
+    void ResetCanShoot()
+    {
+        canShoot = true;
+    }
+
 }
