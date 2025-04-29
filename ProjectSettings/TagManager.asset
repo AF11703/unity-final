@@ -9,6 +9,7 @@ TagManager:
   - EnemyWeapon
   - Fireball
   - Trophy
+  - TrophyUncollect
   layers:
   - Default
   - TransparentFX

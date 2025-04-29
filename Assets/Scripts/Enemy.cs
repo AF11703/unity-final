@@ -97,7 +97,10 @@ public class Enemy : _Character
         }
             
         
-
+        if (getHealth() <= 0f)
+        {
+            Destroy(gameObject);
+        }
                 
 
     }

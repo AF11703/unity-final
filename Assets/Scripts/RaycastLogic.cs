@@ -5,12 +5,17 @@ public class RaycastLogic : MonoBehaviour
 {
 
     [SerializeField] Camera cam;
+    [SerializeField] GameObject enemy;
+    [SerializeField] GameObject afterDeath;
 
+    Enemy skelly;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        skelly = enemy.GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -25,14 +30,17 @@ public class RaycastLogic : MonoBehaviour
             {
                 GameObject gg = hit.transform.gameObject;
 
-                if (gg.CompareTag("Door"))
+                if (gg.CompareTag("TrophyUncollect"))
                 {
-                    Debug.Log("");
+                    enemy.SetActive(true);
+                    gg.SetActive(false);
+                    afterDeath.SetActive(true);
+
                 }
 
-                if (gg.CompareTag("Trophy"))
+                if (gg.CompareTag("Trophy") && skelly.getHealth() <= 0f)
                 {
-                    Debug.Log("Trophy collected");
+                    gg.SetActive(false);
                 }
             }
         }
